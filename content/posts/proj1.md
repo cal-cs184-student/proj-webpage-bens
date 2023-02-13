@@ -10,7 +10,7 @@ TocOpen: false
 draft: false
 hidemeta: false
 comments: true
-description: https://cs184.bencuan.me/posts/proj1
+description: https://github.com/cal-cs184-student/proj-webpage-bens || https://github.com/cal-cs184-student/p1-rasterizer-sp23-bens/
 # canonicalURL: "https://canonical.url/to/page"
 disableHLJS: true # to disable highlightjs
 disableShare: false
