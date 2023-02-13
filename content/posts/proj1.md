@@ -3,16 +3,15 @@ title: "Project 1: Rasterizer"
 date: 2023-02-12
 # weight: 1
 # aliases: ["/first"]
-tags: ["first"]
+# tags: ["first"]
 author: ["Ben Cuan", "Ben Lin"]
-# author: ["Me", "You"] # multiple authors
 showToc: true
 TocOpen: false
 draft: false
 hidemeta: false
-comments: false
+comments: true
 description: https://cs184.bencuan.me/posts/proj1
-canonicalURL: "https://canonical.url/to/page"
+# canonicalURL: "https://canonical.url/to/page"
 disableHLJS: true # to disable highlightjs
 disableShare: false
 disableHLJS: false
@@ -25,9 +24,9 @@ ShowWordCount: true
 ShowRssButtonInSectionTermList: true
 UseHugoToc: true
 cover:
-    image: "/foo.jpg" # image path/url
-    alt: "<alt text>" # alt text
-    caption: "<text>" # display caption under cover
+    image: "/proj1/foo.jpg" # image path/url
+    alt: "proj1 cover" # alt text
+    # caption: "asdfasdasfd" # display caption under cover
     relative: false # when using page bundles set this to true
     hidden: true # only hide on current single page
 ---
