@@ -2,3 +2,13 @@ baseURL: https://cs184.bencuan.me
 languageCode: en-us
 title: CS184 Projects
 theme: "PaperMod"
+params:
+    homeInfoParams:
+        Title: Bens' CS184 Projects
+        Content: Created by Ben Cuan and Ben Lin | Spring 2023
+
+    socialIcons: # optional
+        - name: "github"
+          url: "https://github.com/cal-cs184-student/proj-webpage-bens"
+        - name: "github"
+          url: "https://github.com/cal-cs184-student/p1-rasterizer-sp23-bens"

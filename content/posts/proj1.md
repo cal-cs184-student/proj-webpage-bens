@@ -69,7 +69,7 @@ The image below illustrates how triangles are rendered (before antialiasing):
 
 For supersampling we sampled the image multiple times within each pixel and then averagd the resulting color for the renderd image. Our supersampling technique sampled evenly within the pixel in a grid formation and saved the pixel's colors to a sample buffer of size of image * supersampling rate. This buffer stored all the samples for a specific pixel in sequence, which allowed for easier math for sampling and rendering.
 
-Supersampling is useful as an antialiasing technique because smooths out edges by blending the sharp cutoffs. For example, without supersampling, a triangle edge may dip inbetween the sample points of neighboring pixels leading to jaggies, supersampling allows that edge to be captured in some of the samples, leading to a smoother transition between being inside and outside of the shape. 
+Supersampling is useful as an antialiasing technique because it smooths out edges by blending the sharp cutoffs. For example, without supersampling, a triangle edge may dip inbetween the sample points of neighboring pixels leading to jaggies, supersampling allows that edge to be captured in some of the samples, leading to a smoother transition between being inside and outside of the shape. 
 
 Our rasterization pipeline changed to sample multiple times according to the supersampling rate and then also render pixels by average the colors for the multiple samples within that pixel. Additionally because liens and points were not supersampled, the fill_pixel method was changed to fill all the samples within a pixel to the corresponding color during supersampling. 
 
