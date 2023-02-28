@@ -24,8 +24,8 @@ ShowWordCount: true
 ShowRssButtonInSectionTermList: true
 UseHugoToc: true
 cover:
-    image: "/proj1/foo.jpg" # image path/url
-    alt: "proj1 cover" # alt text
+    image: "/proj2/p2-t3-02.jpg" # image path/url
+    alt: "proj2 cover" # alt text
     # caption: "asdfasdasfd" # display caption under cover
     relative: false # when using page bundles set this to true
     hidden: true # only hide on current single page
@@ -33,6 +33,8 @@ cover:
 
 
 ## Overview
+
+![Part1](/proj2/p2-t3-02.jpg)
 
 In this project, we implemented several common structures and algorithms used to rasterize 2D curves and 3D meshes based on the Half-Edge data structure.
 
