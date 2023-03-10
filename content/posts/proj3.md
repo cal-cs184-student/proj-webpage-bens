@@ -62,6 +62,42 @@ Sphere:
 
 ## Part 2: Bounding Volume Hierarchy
 
+### Creating the BVH
+In this part, we implemented the BVH acceleration structure to dramatically increase the performance of path tracing.
+
+The algorithm for generating the bounding volume hierarchy is as follows:
+1. First, check if the current node is a leaf node. If so, simply set its `start` and `end` values, then return it. Otherwise, it's an inner node, so we should continue with the algorithm to split.
+2. Find the centroid of the current bounding box.
+3. Create six lists corresponding to the objects to the left and right of each axis of the centroid.
+4. Iterate over all objects in the current box, and add them to three of the six lists depending on its position. (For example, if the centroid is $(1,1,1)$ and an object is at $(0,0,2)$, it should be added to `x_left`, `y_left`, and `z_right`).
+5. Select the axis with the most even split (greatest size of the smallest list out of the left and right).
+6. Create a left and right node with the left and right lists of the selected axis, and pass these into two recursive calls.
+
+Here is a screenshot of the teapot mesh demonstrating the appearance of the BVHNodes:
+![p3](/proj3/p3-2.png)
+
+### Demos
+
+Demos were rendered on an Ubuntu 22.04 virtual machine with 6 Ryzen 7 3700x cores, 16GB RAM, and a GTX 1080.
+
+**Lucy**
+ - 133,796 primitives
+ - Rendering Time: 0.0767s
+ - Average speed: 5.6005 million rays per second
+ - Intersection tests per ray: 1.784651
+
+![lucy](/proj3/CBlucy.png)
+
+
+**Dragon**
+ - 110,012 primitives
+ - Rendering Time: 0.0930s
+ - Average speed: 4.9570 million rays per second
+ - Intersection tests per ray: 3.377663
+
+![dragon](/proj3/CBdragon.png)
+
+
 ## Part 3: Direct Illumination
 
 ## Part 4: Global Illumination
