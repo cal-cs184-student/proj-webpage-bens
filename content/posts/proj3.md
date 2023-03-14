@@ -101,9 +101,40 @@ Demos were rendered on an Ubuntu 22.04 virtual machine with 6 Ryzen 7 3700x core
 ## Part 3: Direct Illumination
 
 We wrote two direct lighting functions: one using uniform hemisphere sampling and the other using importance sampling.
-For uniform hemisphere sampling, we took `num_sample` sample rays eminating from the hit point and uniformly chosen from the hemisphere around the hit point. For each sample we added the light that it would contribute to `L_out` and then averaged `L_out` by the number of samples, and returned that value. To determine how much light each sample would contribute, we first checked if the the ray would intersect another object, and then determined the light that the intersected object would contribute: the emission of that object. At this stage, only light sources could contribute brightness to the hit point.
-For importance sampling, we iterated through all of the light sources in the scene, and estimated their contribution to the lighting of the object. We then normalized that lighting by the pdf of the sample and returned that. For each light, if it was a point light we only took one sample, otherwise we took `ns_area_light` number of samples. For each sample we checked if the object was in front of the light and that there was nothing inbetween the object and the light. If both were the case, then the light would shine on the object and we added it's contribution to the object's brightness.
+For uniform hemisphere sampling, we took `num_sample` sample rays eminating from the hit point and uniformly chosen from the hemisphere around the hit point.
+The algorithm works as follows for each sample ray:
+1. Determine if the ray will intersect with another object in the scene using `intersect` and save the intersection in `light_isect`. 
+2. If there is an intersecion we calculate the contribution to our object's brightness at the hit point using the reflection equation. The values used are in the next 3 steps
+3. $f_r$ is determined using `bsdf->f` of the object.
+3. $L$ is determined by the by the emission of the intersected light. If the object the sample ray intersects with is not a light, then it contributes no brightness.
+4. The angle is determined using `cos_theta` of the sample ray's direction
+5. We add the contribution of this sample to `L_out`
+Once we calculate the contribution of all of the samples, we normalize by the number of samples and return that result as the brightness of the object at the hit point.
+
+For importance sampling, we iterated through all of the light sources in the scene, and estimated their contribution to the lighting of the object.
+The algorithm works as follows for each light source:
+1. If it is a point light we take only one sample, otherwise we take `ns_area_light` samples
+2. For each sample we determine whether the light is behind the object and if there is anything blocking the light in the following two steps
+3. We trace a ray from the light to the hit point, if the distance is positive then we know that the light is behind the object
+4. We check if there is an object between the object and the light using `intersect` with the `max_t` set to the distance from the light to the object. If we do not intersect anything, then we can add the light's contribution to the brightness of the hit point, normalized by the pdf for that light and the number of samples.
+Once we calculate the contribution from all of the light sources we return that result as the brightness of the object at the hit point.
+
+### Demos
+Bunny wih direct illumination and hemispheric sampling
+![CBbunnyH](/proj3/CBbunnyH.png)
+
+Bunny with direct illumination and importance sampling
+![CBbunnyI](/proj3/CBbunnyI.png)
+
+Hemispheric sampling takes much longer to resolve compared to Importance sampling
+
 
 ## Part 4: Global Illumination
 
+We implemented indirect lighting via a monte carlo estimator with russian roulette for random termination. Our `at_least_one_bouce_radiance` function works recursively where we determine how much light is emitted from an object by calling `at_least_one_bounce_radiance` on it. The algorithm works as follows:
+1. Base Case: When there are no further bounces, we return the `one_bounce_radiance` of the object at the hit point according to the algorithms from part 3.
+2. Recursive Case: We randomly sample a ray eminating from the hit point and if it hits an object, we use the reflectance equation to determine the contribution of that intersected object to our hit point. The light of the intersected object is calculated recursively using `at_least_one_bounce_radiance`.
+We keep count of each recursion and terminate at the base case when there are no further bounces. Additionally, we have a chance to randomly terminate based on our Russian Roulette constant. Finally, if the sampled ray has no intersection, the recursion terminates.
 ## Part 5: Adaptive Sampling
+
+
