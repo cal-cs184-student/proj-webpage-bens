@@ -100,6 +100,10 @@ Demos were rendered on an Ubuntu 22.04 virtual machine with 6 Ryzen 7 3700x core
 
 ## Part 3: Direct Illumination
 
+We wrote two direct lighting functions: one using uniform hemisphere sampling and the other using importance sampling.
+For uniform hemisphere sampling, we took `num_sample` sample rays eminating from the hit point and uniformly chosen from the hemisphere around the hit point. For each sample we added the light that it would contribute to `L_out` and then averaged `L_out` by the number of samples, and returned that value. To determine how much light each sample would contribute, we first checked if the the ray would intersect another object, and then determined the light that the intersected object would contribute: the emission of that object. At this stage, only light sources could contribute brightness to the hit point.
+For importance sampling, we iterated through all of the light sources in the scene, and estimated their contribution to the lighting of the object. We then normalized that lighting by the pdf of the sample and returned that. For each light, if it was a point light we only took one sample, otherwise we took `ns_area_light` number of samples. For each sample we checked if the object was in front of the light and that there was nothing inbetween the object and the light. If both were the case, then the light would shine on the object and we added it's contribution to the object's brightness.
+
 ## Part 4: Global Illumination
 
 ## Part 5: Adaptive Sampling
