@@ -1,6 +1,6 @@
 ---
-title: "Project 3 Part 1: PathTracer"
-date: 2023-03-08
+title: "Project 3 Part 2: PathTracer Deluxe Edition"
+date: 2023-03-20
 # weight: 1
 # aliases: ["/first"]
 # tags: ["first"]
@@ -10,7 +10,7 @@ TocOpen: false
 draft: false
 hidemeta: false
 comments: true
-description: https://github.com/cal-cs184-student/proj-webpage-bens || https://github.com/cal-cs184-student/p2-pathtracer-sp23-bens3
+description: https://github.com/cal-cs184-student/proj-webpage-bens || https://github.com/cal-cs184-student/p3-2-pathtracer-sp23-bens4
 # canonicalURL: "https://canonical.url/to/page"
 disableHLJS: true # to disable highlightjs
 disableShare: false
@@ -30,6 +30,77 @@ cover:
     relative: false # when using page bundles set this to true
     hidden: true # only hide on current single page
 ---
+
+## Introduction
+
+TODO
+
+## Part 1: Mirror and Glass Materials
+
+Below are some demo renders of `CBspheres.dae` with varying ray depths.
+
+Max Ray Depth: 0
+```
+./pathtracer -t 8 -s 64 -l 4 -m 0 -f spheres_0.png -r 480 360 ../dae/sky/CBspheres.dae
+```
+![spheres](/proj3-2/spheres_0.png)
+
+For `m=0`, there are no multibounce effects since only the direct lighting is rendered.
+
+Max Ray Depth: 1
+```
+./pathtracer -t 8 -s 64 -l 4 -m 1 -f spheres_1.png -r 480 360 ../dae/sky/CBspheres.dae
+```
+![spheres](/proj3-2/spheres_1.png)
+
+For `m=1`, there are also no multibounce effects since only one bounce is rendered
+
+Max Ray Depth: 2
+```
+./pathtracer -t 8 -s 64 -l 4 -m 2 -f spheres_2.png -r 480 360 ../dae/sky/CBspheres.dae
+```
+![spheres](/proj3-2/spheres_2.png)
+
+`m=2` is when we begin to see some reflection and refraction effects. However, all of the multibounce materials appear black in the reflection since further rays do not bounce off of this image.
+
+
+
+Max Ray Depth: 3
+```
+./pathtracer -t 8 -s 64 -l 4 -m 3 -f spheres_3.png -r 480 360 ../dae/sky/CBspheres.dae
+```
+![spheres](/proj3-2/spheres_3.png)
+
+At `m=3`, we begin to see a reflection within the reflection. As expected, this secondary reflection is black since rays do not bounce further than this. 
+
+Max Ray Depth: 4
+```
+./pathtracer -t 8 -s 64 -l 4 -m 4 -f spheres_4.png -r 480 360 ../dae/sky/CBspheres.dae
+```
+![spheres](/proj3-2/spheres_4.png)
+
+At `m=4`, the secondary reflection is properly rendered to the point where the render becomes nearly complete.
+
+Max Ray Depth: 5
+```
+./pathtracer -t 8 -s 64 -l 4 -m 5 -f spheres_5.png -r 480 360 ../dae/sky/CBspheres.dae
+```
+![spheres](/proj3-2/spheres_5.png)
+
+There are no more significant differences at `m=5` from the previous depth, although the image does become slightly clearer.
+
+Max Ray Depth: 100
+```
+./pathtracer -t 8 -s 64 -l 4 -m 100 -f spheres_100.png -r 480 360 ../dae/sky/CBspheres.dae
+```
+![spheres](/proj3-2/spheres_100.png)
+
+There are also no significant differences for `m=100` compared to `m=5`.
+
+
+
+
+
 
 
 ## Overview
