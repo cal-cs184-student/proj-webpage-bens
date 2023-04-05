@@ -106,5 +106,11 @@ If we have additional time, we hope to be able to add the following deliverables
 
     List what resources, e.g. books, papers and/or online resources that are references for your project. List the computing platform, hardware and software resources that you will use for your project. You have a wide latitude here to use what you have access to, but be aware that you will have to support and trouble-shoot on your platform yourselves. If you are starting from an existing piece of code or system, describe and provide a pointer to it here.
 
-https://www.diva-portal.org/smash/get/diva2:1059684/FULLTEXT01.pdf
+- NVIDIA's Graphics Codex on Ray marching [link](https://graphicscodex.courses.nvidia.com/app.html?page=_rn_rayMrch)
+
+- Paper on Procedural Terrain Generation Using Ray Marching [link](https://www.diva-portal.org/smash/get/diva2:1059684/FULLTEXT01.pdf)
+
+- Ray marching in Unity [link](https://gist.github.com/javiersalcedopuyo/fac64012fd36082571c07e6b46d24e70)
+
+- Unity Engine [link](https://unity.com/)
 
