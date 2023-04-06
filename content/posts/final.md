@@ -46,7 +46,7 @@ A large volume of research has already been conducted on raymarching algorithms-
 
 ## Goals and Deliverables
 
-The primary goal for this project will be to render an infinitely generating landscape using raymarching.
+The primary goal for this project will be to render an infinitely generating landscape using raymarching. As a stretch goal, we want to make this landscape look pretty.
 
 ### Primary Objectives
 
@@ -63,16 +63,9 @@ If we have additional time, we hope to be able to add the following deliverables
 1. Use texture mapping to add a texture to the landscape
 2. Use environmental lighting to light the landscape in realistic manner
 
-    This is the most important part of your proposal. You should carefully think through what you are trying to accomplish, what results you are going for, and why you think you can accomplish those goals. For example:
-    Since this is a graphics class you will likely define the kind of images you will create (e.g. including a photo of a new lighting effect you will ,simulate).
-    If you are working on an interactive system describe what demo you will create.
-    Define how you will measure the quality / performance of your system (e.g. graphs showing speedup, or quantifying accuracy). It may not be possible to define precise target metrics at this time, but we encourage you to try.
-    What questions do you plan to answer with your analysis?
-    You should break this section into two parts: (1) what you plan to deliver, and (2) what you hope to deliver. In (1), describe what you believe you must accomplish to have a successful project and achieve the grade you expect (i.e. your baseline plan -- planning for some unexpected problems would make sense). In (2), describe what you hope to achieve if things go well and you get ahead of schedule (your aspirational plan).
+
 
 ## Schedule
-
-    In this section you should organize and plan the tasks and subtasks that your team will execute. Since presentations are ~4 weeks from the due-date of the proposal, you should include a set of tasks for every week.
 
 ### Week 1
 
@@ -97,14 +90,12 @@ If we have additional time, we hope to be able to add the following deliverables
 - [ ] Combine both raymarching and procedural generation into a single scene
 
 ### Week 4
-- [ ] Create demo video
+- [ ] Create demo video and presentation
 - [ ] Finish writeup
 - [ ] Stretch goal: implement texture mapping
 - [ ] Stretch goal: implement lighting
 
 ## Resources
-
-    List what resources, e.g. books, papers and/or online resources that are references for your project. List the computing platform, hardware and software resources that you will use for your project. You have a wide latitude here to use what you have access to, but be aware that you will have to support and trouble-shoot on your platform yourselves. If you are starting from an existing piece of code or system, describe and provide a pointer to it here.
 
 - NVIDIA's Graphics Codex on Ray marching [link](https://graphicscodex.courses.nvidia.com/app.html?page=_rn_rayMrch)
 
