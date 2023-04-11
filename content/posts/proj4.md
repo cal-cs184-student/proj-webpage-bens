@@ -114,8 +114,51 @@ With maximum damping, the cloth does not bounce at all, and settles immediately 
 
 ## Part 3: Collisions with Other Objects
 
+### Changing the spring constant
+ks = 500
+![p4-3-screenshot](/proj4/p4-3-2.png)
+
+ks = 5000
+![p4-3-screenshot](/proj4/p4-3-1.png)
+
+ks = 50000
+![p4-3-screenshot](/proj4/p4-3-3.png)
+
+The larger spring constant (ks) causes the cloth to be less tightly draped over the sphere. This is because the higher spring constant provides more force keeping the cloth flat to counterbalance gravity pulling the cloth down around the sphere.
+
+### Image of cloth on plane
+![p4-3-screenshot](/proj4/p4-3-4.png)
 
 ## Part 4: Self-Collisions
+
+### Cloth falling steps
+
+Initial collision with the plane
+![p4-4-screenshot](/proj4/p4-4-1.png)
+
+Cloth folding in on itself
+![p4-4-screenshot](/proj4/p4-4-2.png)
+
+Cloth lying at rest
+![p4-4-screenshot](/proj4/p4-4-3.png)
+
+### Folded cloth with varying variables
+
+High density
+![p4-4-screenshot](/proj4/p4-highdensity.png)
+
+Low density
+![p4-4-screenshot](/proj4/p4-lowdensity.png)
+
+With a higher density the cloth seems to spread itself out more when it settles.
+
+High spring constant
+![p4-4-screenshot](/proj4/p4-bigKs.png)
+
+Low spring constant
+![p4-4-screenshot](/proj4/p4-smallKs.png)
+
+With a high spring constant the cloth does not fold into itself as much, especially while it is initially falling onto the plane. With a low spring constant the cloth folds into itself much more tightly.
 
 
 ## Part 5: Shaders
