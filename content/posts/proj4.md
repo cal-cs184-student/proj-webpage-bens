@@ -163,3 +163,50 @@ With a high spring constant the cloth does not fold into itself as much, especia
 
 ## Part 5: Shaders
 
+In this section, we implemented a variety of shaders for the cloth.
+
+A shader program computes the color at every point on objects in the scene based on parameters such as the position, normal direction, lighting, color, and texture map. The vertex and fragment shaders work together: vertex shaders help create material effects by varying the appearance and position at vertices in the object, while fragment shaders fill in the spaces between vertices during rasterization.
+
+
+### Blinn-Phong
+
+The Blinn-Phong shading model is a method of rendering lighting effects based on material properties. It does this by combining three different types of lighting:
+ - Ambient lighting does not depend on the position on the object; it is constant throughout the scene.
+ - Diffuse lighting creates the matte appearance of an object by varying intensity based on how far away a point is from the light.
+ - Specular lighting creates the shiny reflections of an object by creating a very concentrated version of diffuse lighting through exponentiation of the lighting component, such that large values become extremely bright and small values become negligible.
+
+
+Here is the Blinn-Phong model with only ambient lighting:
+
+
+With only diffuse lighting:
+
+
+With only specular lighting:
+
+
+### Texture Mapping
+
+Here's our custom texture, the Black Lotus card:
+![blacklotus](/proj1/blacklotus_square.png)
+
+This is what the cloth looks like with this texture:
+
+
+### Bump and Displacement Mapping
+
+Here's the bump-mapped sphere using the brick `texture_3.png`:
+
+Here's the displacement-mapped sphere using the same texture:
+
+Now, here's the same two images with coarseness values `-o 16 -a 16`:
+
+
+And for `-o 128 -a 128`:
+
+
+As we can see from the above images, ... TODO
+
+
+### Mirror Shading
+Here's a screenshot of the mirror shading on the cloth and sphere:
