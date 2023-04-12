@@ -210,3 +210,9 @@ As we can see from the above images, ... TODO
 
 ### Mirror Shading
 Here's a screenshot of the mirror shading on the cloth and sphere:
+
+Mirror Sphere
+![p4-5-screenshot](/proj4/p5-5-sphere.png)
+
+Mirror Cloth
+![p4-5-screenshot](/proj4/p5-5-cloth.png)
