@@ -34,6 +34,12 @@ cover:
 # [Milestone] Endless Procedural Landscape with Raymarching
 Ben Cuan, Ben Lin, Joel Rodiel-Lucero, Ishaan Dham
 
+## Video and Slides
+
+Video: [link](https://drive.google.com/file/d/15e7-R1M6PP9O0eBl8DdSVflaTwYkY9f6/view?usp=sharing)
+
+Slides: [link](https://docs.google.com/presentation/d/1Wk765B4NZEx9up0gdnWPd1p5UiiZbu1SaHuM0xJq5Z0/edit?usp=share_link)
+
 ## Summary
 
 ![A Raymarched scene of Endless Oscillating Spheres dancing to the Mii Channel Trap Remix](/final/forever.png)
