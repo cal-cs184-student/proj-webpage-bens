@@ -24,7 +24,7 @@ ShowWordCount: true
 ShowRssButtonInSectionTermList: true
 UseHugoToc: true
 cover:
-    image: "/proj3/walle2.png" # image path/url
+    image: "/proj4/p5-5-cloth.png" # image path/url
     alt: "proj4 cover" # alt text
     # caption: "asdfasdasfd" # display caption under cover
     relative: false # when using page bundles set this to true
@@ -177,12 +177,16 @@ The Blinn-Phong shading model is a method of rendering lighting effects based on
 
 
 Here is the Blinn-Phong model with only ambient lighting:
-
+![p4](/proj4/p4-5-phong-ambient.png)
 
 With only diffuse lighting:
-
+![p4](/proj4/p4-5-phong-diffuse.png)
 
 With only specular lighting:
+![p4](/proj4/p4-5-phong-specular.png)
+
+With all lighting:
+![p4](/proj4/p4-5-phong.png)
 
 
 ### Texture Mapping
@@ -191,21 +195,36 @@ Here's our custom texture, the Black Lotus card:
 ![blacklotus](/proj1/blacklotus_square.png)
 
 This is what the cloth looks like with this texture:
+![blacklotus](/proj4/p4-5-texture-flat.png)
 
+This is the same cloth as above, after falling on the sphere:
+![blacklotus](/proj4/p4-5-texture-round.png)
 
 ### Bump and Displacement Mapping
 
 Here's the bump-mapped sphere using the brick `texture_3.png`:
+![brick](/proj4/p4-5-bump.png)
+![brick](/proj4/p4-5-bump-cloth.png)
 
 Here's the displacement-mapped sphere using the same texture:
+![brick](/proj4/p4-5-displacement.png)
 
-Now, here's the same two images with coarseness values `-o 16 -a 16`:
+Now, here's the same images with coarseness values `-o 16 -a 16`:
 
+(Bump)
+![brick](/proj4/p4-5-bump-16.png)
+
+(Displacement)
+![brick](/proj4/p4-5-displacement-16.png)
 
 And for `-o 128 -a 128`:
+(Bump)
+![brick](/proj4/p4-5-bump-128.png)
 
+(Displacement)
+![brick](/proj4/p4-5-displacement-128.png)
 
-As we can see from the above images, ... TODO
+As we can see from the above images, there doesn't seem to be a very large difference in the coarseness.
 
 
 ### Mirror Shading
