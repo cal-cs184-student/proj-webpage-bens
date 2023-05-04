@@ -10,7 +10,7 @@ TocOpen: false
 draft: false
 hidemeta: false
 comments: true
-description: Raymarching Music Visualizer
+description: Endless Raymarching Music Visualizer
 # canonicalURL: "https://canonical.url/to/page"
 disableHLJS: true # to disable highlightjs
 disableShare: false
@@ -33,11 +33,14 @@ cover:
 
 ## Abstract
 
+
+![splash](/final/finalsplash.png)
+
 This project is a music visualizer using a sea of morphing shapes to capture the essence of the song. The shapes are rendered to create an infinite sea of shapes using raymarching. The sea of shapes visualize the different aspects of the music in the following ways:
 * The size of each shape reflects the volume of the song
 * The shapes rotate to the beat of the song
 * The spectrum of the song is visualized in the bottom left corner
-The project was coded in Unity using shaders. In `Raymarch.shader` each ray is cast out from the camera until the distance between steps, as calculated by `DistanceEstimator`, is sufficiently small. Then the object is rendered with Blinn-Phong shading. `DistanceEstimator` uses the SDF of the given shape to determine the distance to that shape. The volume and spectrogram are handled through Unity scripts and passed through to the shader as material parameters.
+The project was coded in Unity using shaders. In `Raymarch.shader` each ray is cast out from the camera until the distance between steps, as calculated by `DistanceEstimator`, is sufficiently small. Then the object is rendered with Blinn-Phong shading. `DistanceEstimator` uses the SDF (signed distance function) of the given shape to determine the distance to that shape. The volume and spectrogram are handled through Unity scripts and passed through to the shader as material parameters.
 
 ## Technical Approach
 
@@ -53,16 +56,66 @@ We used the technique of Raymarching in order to solve the rendering problem. Bu
     3. We can visualize this distance as the radius of a circle. If the radius is bigger than _MINDIST_, we repeat another step of the raymarching process, but this time the origin point lays *on* the end of the circle. We simply advance the previous origin point by the calculated signed distance by the camera's direction.
     4. We repeat steps 2-3 until the signed distance is smaller than _MINDIST_. We can interpret this as the final collision hit point. With the final accumulated distance, the advanced origin point and the direction, we can find the point.
 
+![raymarch](/final/raymarching.png)
+
+Here is the code for iterating through the steps of raymarching:
+```c
+float totalDistance = 0.0;
+int steps;
+for (steps = 0; steps < MAXSTEPS; steps++) {
+    float3 p = from + totalDistance * direction;
+    float dist = DistanceEstimator(p);
+    totalDistance += dist;
+    if (dist < MINDIST) {
+        // Color the object
+    }
+}
+// Color the background
+```
+
 #### Audio Visualization
+We used Unity's built-in `GetSpectrumData()` function to extract the spectrogram data from our audio clips. We then aggregated the data into 8 frequency bins and passed this data into both the canvas to show the visualization, and the shader file.
+
+To get the loudness at the current time, we fetched data from the `audioSource` object in the scene. This data could then be passed into ShaderLab using `material.SetFloat()`.
+
+These parameters were then used in the shader code to perform several transformations.
+
+![spectrogram](/final/spectrogram.gif)
 
 
 
 #### Implicit SDF's
-Each type of object was rendered using it's SDF (Signed Distance Function). We found the SDFs for various shapes online (https://iquilezles.org/articles/distfunctions/) and used them to define the shapes we chose. We ended up rendering the following shapes: sphere, cube, octahedron, torus, and solid angle. 
+Each type of object was rendered using its SDF (Signed Distance Function). We found the SDFs for various shapes online (https://iquilezles.org/articles/distfunctions/) and used them to define the shapes we chose. We ended up rendering the following shapes: sphere, cube, octahedron, torus, and solid angle. 
 
+SDF's take in a position vector and some additional parameters (like size/radius), and returns a float orthogonal distance to the surface of the shape it represents. This makes it very easy to implicitly define objects using functions, rather than having to explicitly create meshes as is required for raytracing. Each step along the ray was defined as the orthogonal distance to the object. Thus, once the step size became small, we knew that the ray had collided with the object's surface.
 
+SDF's are inherently very simple in terms of code. For example, a sphere is defined with the single-line function below:
+
+```c
+float sdSphere(float3 p, float r) {
+    return length(p) - r;
+}
+```
 
 #### SDF Transformations
+
+To augment different shapes together we used `opSmoothUnion` as defined below:
+
+```c
+float opSmoothUnion(float d1, float d2, float k) {
+    float h = clamp(0.5 + 0.5*(d2-d1)/k, 0.0, 1.0 );
+    return lerp(d2, d1, h) - k*h*(1.0-h);
+}
+```
+
+This function essentially performs a linear interpolation on the distances calculated from two different object sdfs, which creates a smooth join as illustrated in this image:
+
+![smooth union](/final/smoothunion.png)
+
+
+#### Blinn-Phong Shading
+For shading we calculated the normal by calculating a gradient around the desired point, and then normalizing this gradient vector to create the unit normal vector. Using the normal vector we implemented Blinn-Phong shading as we learned in class as a sum of the background color, the diffuse shading, and a specular highlight. 
+For the background shading we did a linear interpolation between the base color and the hue shifted color. We changed the linear interpolation based on a sine wave derived from the shader's time.
 
 
 ### Problems Encountered
@@ -76,6 +129,20 @@ The biggest take-away from this project was acquiring the ability to build, use,
 We also learned a great deal about the strengths and weaknesses of raymarching through our various attempts to add features. We found that once we picked up the concept of an SDF, it was incredibly easy to create geometric shapes and modify them using transforms such as scaling, rotating, or morphing with other shapes. Smooth morphing especially would have been very difficult to do with traditional rendering methods, but could be accomplished in only a few lines using raymarching. However, raymarching does not seem very suitable for complex shapes or meshes, as we were unable to create the scenery we originally intended to (e.g. hills, grass, clouds...).
 
 ## Results
+
+* Here is our [code](https://github.com/64bitpandas/eternal-marcher).
+
+* Here is a [video demo](https://drive.google.com/file/d/180I8JnpMHcHjdbu86mt10KKre7bCHNuD/view) of the music visualizer.
+
+* Here is a [video of our presentation](https://drive.google.com/file/d/1qARdzY-jT-Gx0qwtZI6ludoEPjJfqSVQ/view?usp=sharing).
+
+* Here are our [presentation slides](https://docs.google.com/presentation/d/1ZYRTfo9rsUTL6RA_iK81w5X1f4Ef6jb8YWHSNIDyfyc/edit#slide=id.g23e1f71fd94_0_32).
+
+<br>
+
+***
+
+<br>
 
 ### References and Sources
 
